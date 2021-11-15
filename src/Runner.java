@@ -18,76 +18,23 @@ public class Runner {
     layout.setAutoCreateGaps(true);
     layout.setAutoCreateContainerGaps(true);
     
+    MouseClick[] mc = new MouseClick[6];
+    for(int i = 0; i < mc.length; i++) {
+      mc[i] = new MouseClick();
+    }
+    
     
     //Status reports on whether click is calibrated or not
-    JLabel firstCaliStatus = new JLabel("Uncalibrated");
-    JLabel secCaliStatus = new JLabel("Uncalibrated");
-    JLabel thirdCaliStatus = new JLabel("Uncalibrated");
-    JLabel fourthCaliStatus = new JLabel("Uncalibrated");
-    JLabel fifthCaliStatus = new JLabel("Uncalibrated");
-    JLabel sixthCaliStatus = new JLabel("Uncalibrated");
+    JLabel caliStatus[] = new JLabel[6];
+    for(int i = 0; i < caliStatus.length; i++) {
+      caliStatus[i] = mc[i].calibrateStatus;
+    }
     
     //Buttons to adjust calibrations
-    JButton firstCalibrate = new JButton("Calibrate");
-    firstCalibrate.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        OnCalibrateClick(firstCaliStatus);
-        
-      }
-      
-    });
-    JButton secCalibrate = new JButton("Calibrate");
-    secCalibrate.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        OnCalibrateClick(secCaliStatus);
-        
-      }
-      
-    });
-    JButton thirdCalibrate = new JButton("Calibrate");
-    thirdCalibrate.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        OnCalibrateClick(thirdCaliStatus);
-        
-      }
-      
-    });
-    JButton fourthCalibrate = new JButton("Calibrate");
-    fourthCalibrate.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        OnCalibrateClick(fourthCaliStatus);
-        
-      }
-      
-    });
-    JButton fifthCalibrate = new JButton("Calibrate");
-    fifthCalibrate.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        OnCalibrateClick(fifthCaliStatus);
-        
-      }
-      
-    });
-    JButton sixthCalibrate = new JButton("Calibrate");
-    sixthCalibrate.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        OnCalibrateClick(sixthCaliStatus);
-        
-      }
-      
-    });
+    JButton calibrate[] = new JButton[6];
+    for(int i = 0; i < calibrate.length;i++) {
+      calibrate[i] = new JButton("Calibrate");
+    }
     JButton start = new JButton("Start");
     JButton reset = new JButton("Reset");
     reset.addActionListener(new ActionListener() {
@@ -95,7 +42,7 @@ public class Runner {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-        
+        resetSetting(mc);
       }
       
     });
@@ -117,62 +64,51 @@ public class Runner {
     
     
     //Labels displaying what following explaining what following visuals do
-    JLabel firstWaitLabel = new JLabel("Wait(Seconds)");
-    JLabel secWaitLabel = new JLabel("Wait(Seconds)");
-    JLabel thirdWaitLabel = new JLabel("Wait(Seconds)");
-    JLabel fourthWaitLabel = new JLabel("Wait(Seconds)");
-    JLabel fifthWaitLabel = new JLabel("Wait(Seconds)");
-    JLabel sixthWaitLabel = new JLabel("Wait(Seconds)");
+    JLabel waitLabel[] = new JLabel[6];
+    for(int i = 0; i < waitLabel.length; i++) {
+      waitLabel[i] = new JLabel("Wait(Seconds)");
+    }
     
     //Sets up duration between current mouse click and next mouse click
-    JTextField firstWait = new JTextField();
-    JTextField secWait = new JTextField();
-    JTextField thirdWait = new JTextField();
-    JTextField fourthWait = new JTextField();
-    JTextField fifthWait = new JTextField();
-    JTextField sixthWait = new JTextField();
+    JTextField wait[] = new JTextField[6];
+    for(int i = 0; i < wait.length;i++) {
+      wait[i] = new JTextField();
+    }
     
     
     //Sets up the "look" of the GUI
     layout.setHorizontalGroup(
         layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(firstCaliStatus)
-            .addComponent(secCaliStatus)
-            .addComponent(thirdCaliStatus)
-            .addComponent(fourthCaliStatus)
-            .addComponent(fifthCaliStatus)
-            .addComponent(sixthCaliStatus))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(firstCaliStatus)
-            .addComponent(secCaliStatus)
-            .addComponent(thirdCaliStatus)
-            .addComponent(fourthCaliStatus)
-            .addComponent(fifthCaliStatus)
-            .addComponent(sixthCaliStatus))
+            .addComponent(caliStatus[0])
+            .addComponent(caliStatus[1])
+            .addComponent(caliStatus[2])
+            .addComponent(caliStatus[3])
+            .addComponent(caliStatus[4])
+            .addComponent(caliStatus[5]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(firstCalibrate)
-            .addComponent(secCalibrate)
-            .addComponent(thirdCalibrate)
-            .addComponent(fourthCalibrate)
-            .addComponent(fifthCalibrate)
-            .addComponent(sixthCalibrate)
+            .addComponent(calibrate[0])
+            .addComponent(calibrate[1])
+            .addComponent(calibrate[2])
+            .addComponent(calibrate[3])
+            .addComponent(calibrate[4])
+            .addComponent(calibrate[5])
             .addComponent(start))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-              .addComponent(firstWaitLabel)
-              .addComponent(secWaitLabel)
-              .addComponent(thirdWaitLabel)
-              .addComponent(fourthWaitLabel)
-              .addComponent(fifthWaitLabel)
-              .addComponent(sixthWaitLabel))
+              .addComponent(waitLabel[0])
+              .addComponent(waitLabel[1])
+              .addComponent(waitLabel[2])
+              .addComponent(waitLabel[3])
+              .addComponent(waitLabel[4])
+              .addComponent(waitLabel[5]))
               .addComponent(help)
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-              .addComponent(firstWait)
-              .addComponent(secWait)
-              .addComponent(thirdWait)
-              .addComponent(fourthWait)
-              .addComponent(fifthWait)
-              .addComponent(sixthWait)
+              .addComponent(wait[0])
+              .addComponent(wait[1])
+              .addComponent(wait[2])
+              .addComponent(wait[3])
+              .addComponent(wait[4])
+              .addComponent(wait[5])
               .addComponent(reset))
           
                 
@@ -181,35 +117,35 @@ public class Runner {
     layout.setVerticalGroup(
         layout.createSequentialGroup()
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-              .addComponent(firstCaliStatus)
-              .addComponent(firstCalibrate)
-              .addComponent(firstWaitLabel)
-              .addComponent(firstWait))
+              .addComponent(caliStatus[0])
+              .addComponent(calibrate[0])
+              .addComponent(waitLabel[0])
+              .addComponent(wait[0]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-              .addComponent(secCaliStatus)
-              .addComponent(secCalibrate)
-              .addComponent(secWaitLabel)
-              .addComponent(secWait))
+              .addComponent(caliStatus[1])
+              .addComponent(calibrate[1])
+              .addComponent(waitLabel[1])
+              .addComponent(wait[1]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-              .addComponent(thirdCaliStatus)
-              .addComponent(thirdCalibrate)
-              .addComponent(thirdWaitLabel)
-              .addComponent(thirdWait))
+              .addComponent(caliStatus[2])
+              .addComponent(calibrate[2])
+              .addComponent(waitLabel[2])
+              .addComponent(wait[2]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-              .addComponent(fourthCaliStatus)
-              .addComponent(fourthCalibrate)
-              .addComponent(fourthWaitLabel)
-              .addComponent(fourthWait))
+              .addComponent(caliStatus[3])
+              .addComponent(calibrate[3])
+              .addComponent(waitLabel[3])
+              .addComponent(wait[3]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-              .addComponent(fifthCaliStatus)
-              .addComponent(fifthCalibrate)
-              .addComponent(fifthWaitLabel)
-              .addComponent(fifthWait))
+              .addComponent(caliStatus[4])
+              .addComponent(calibrate[4])
+              .addComponent(waitLabel[4])
+              .addComponent(wait[4]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-              .addComponent(sixthCaliStatus)
-              .addComponent(sixthCalibrate)
-              .addComponent(sixthWaitLabel)
-              .addComponent(sixthWait))
+              .addComponent(caliStatus[5])
+              .addComponent(calibrate[5])
+              .addComponent(waitLabel[5])
+              .addComponent(wait[5]))
           .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
               .addComponent(start)
               .addComponent(help)
@@ -222,7 +158,20 @@ public class Runner {
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
   }
-  static void OnCalibrateClick(JLabel label) {
-    label.setText("Calibrated");
+  static void OnCalibrateClick(MouseClick mc) {
+    mc.calibrateStatus.setText("Calibrated");
+  }
+  
+  static void resetSetting(MouseClick mc[]) {
+    for(int i = 0; i < mc.length; i++) {
+      mc[i].setXPosition(0);
+      mc[i].setYPosition(0);
+      mc[i].calibrateStatus.setText("Uncalibrated");
+    }
+    
+  }
+  
+  static void startProgram() {
+    
   }
 }
